@@ -1,0 +1,42 @@
+<style>
+    .spaces {
+        margin-bottom: 20px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    .pad {
+        padding-top: 40px;
+
+    }
+
+    .bg_item_us {
+        background-color: rgb(49, 52, 72);
+    }
+</style>
+<div class="container-fluid bg_container">
+    <div class="row card-3" style="padding-bottom: 10px; margin-bottom: 10px; padding-top: 10px;">
+        <div class="col ft" style="font-size: 25px;"><%= mg_user %></div>
+        <div class="col"><input type="search" placeholder="Search"></div>
+    </div>
+
+    <% for(let i = 0; i < user.length; i++) { %>
+    <div class="row spaces bg_item_us">
+        <div class="col-2">
+            <img src="https://img.icons8.com/bubbles/100/000000/user.png" alt="Image user" class="rounded-circle" />
+        </div>
+        <!-- class col-3 ứng với column có độ rộng 25% -->
+        <div class="col-3 pad text-warning">
+            <p><%= user[i].username %></p>
+        </div>
+        <!-- class col-9 ứng với column có độ rộng 75% -->
+        <div class="col-4 pad text-warning">
+            <p><%= user[i].email %></p>
+        </div>
+        <div class="col-3 pad text-warning">
+            <p><%= user[i].createdAt %></p>
+        </div>
+
+    </div>
+    <% } %>
+</div>

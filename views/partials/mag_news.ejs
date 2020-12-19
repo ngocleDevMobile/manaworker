@@ -1,0 +1,136 @@
+<!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <h1>hello</h1>
+</div> -->
+<link href="https://unpkg.com/popper.js">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+<style>
+    .img-fluid {
+        width: 100%;
+
+    }
+
+    .card__image {
+        display: block;
+        max-width: 100%;
+        height: 200px;
+        overflow: hidden;
+    }
+
+    .bg_container {
+        background-color: rgb(40, 42, 59);
+    }
+
+    .has-search .form-control {
+        padding-left: 2.375rem;
+    }
+
+    .has-search .form-control-feedback {
+        position: absolute;
+        z-index: 2;
+        display: block;
+        width: 2.375rem;
+        height: 2.375rem;
+        line-height: 2.375rem;
+        text-align: center;
+        pointer-events: none;
+        color: #aaa;
+    }
+
+    .mg {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="row card-3" style="margin-top: 10px; margin-bottom: 10px; padding-bottom: 10px;">
+    <div class="col ft" style="font-size: 25px;"><%= mg_new %></div>
+    <div class="col"><input type="search" placeholder="Search"></div>
+</div>
+
+<div class="row over">
+    <% for(let i = 0; i < news.length; i++) { %>
+    <div class="col-sm-4 ">
+        <div class="card">
+
+            <img class="card-img-top fit-image" src="http://localhost:5000<%=news[i].path%>" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-titles hidetext text-muted text-uppercase"><%= news[i].title %></h5>
+                <p class="card-text text-muted hidetext ">
+                    <span><%= news[i].content %></span>
+                </p>
+            </div>
+            <div class="card-footer text-muted">
+                <%= news[i].date_news %>
+            </div>
+        </div>
+    </div>
+    <% } %>
+</div>
+
+
+
+
+<div class="row fixed-bottom">
+    <div class="mainopShadow"></div>
+    <div class="fab" data-toggle="modal" data-target="#form">
+        <div class="mainop">
+            <i id="addIcon" class="zmdi zmdi-plus"></i>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <h5 class="modal-title" id="exampleModalLabel">Create Account</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/news/upload" method="POST" enctype="multipart/form-data">
+                <div class="file-field input-field">
+                    <div class="form-group">
+                        <label for="email1" class="font-weight-bold">Tiêu đề</label>
+                        <input type="text" name="title" class="form-control" placeholder="Tạo tiêu đề...">
+                    </div>
+                    <div class="form-group">
+                        <label for="password1" class="font-weight-bold">Nội dung</label>
+                        <!-- <input type="text" style="height: 100px" class="form-control" placeholder="Nội dung"> -->
+                        <textarea class="form-control" name="content" id="exampleTextarea" rows="3"
+                            placeholder="Nội dung ..."></textarea>
+                    </div>
+                    <div class="file-upload">
+                        <div class="file-select">
+                            <div class="file-select-button" id="fileName">Choose File</div>
+                            <div class="file-select-name" id="noFile">No file chosen...</div>
+                            <input type="file" name="photo" id="chooseFile">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-top-0 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-dark">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    $('#chooseFile').bind('change', function () {
+        var filename = $("#chooseFile").val();
+        if (/^\s*$/.test(filename)) {
+            $(".file-upload").removeClass('active');
+            $("#noFile").text("No file chosen...");
+        }
+        else {
+            $(".file-upload").addClass('active');
+            $("#noFile").text(filename.replace("C:\\fakepath\\", ""));
+        }
+    });
+
+</script>

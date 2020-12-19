@@ -1,0 +1,31 @@
+<div class="limiter ">
+    <div class="container-login100 bg-full">
+        <div class="wrap-login100 card-4">
+            <div class="login100-form-title" style="background-image: url(../images/build.jpg);">
+                <span class="login100-form-title-1" style="font-family: 'Roboto', sans-serif">
+                    Đăng nhập
+                </span>
+            </div>
+            <%- include ('./partials/message') %>
+            <form action="/login" method="POST" class="login100-form validate-form">
+                <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
+                    <span class="label-input100">Email</span>
+                    <input class="input100" type="email" name="email" placeholder="Email">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input m-b-18" data-validate="Password is required">
+                    <span class="label-input100">Password</span>
+                    <input class="input100" type="password" name="password" placeholder="Password">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button type="submit" class="login100-form-btn" style="font-family: 'Roboto', sans-serif">
+                        Đăng nhập
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

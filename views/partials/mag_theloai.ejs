@@ -1,0 +1,212 @@
+<!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <h1>hello</h1>
+</div> -->
+<link href="https://unpkg.com/popper.js">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+<style>
+    .rad {
+        height: 50px;
+        width: 50px;
+        margin-top: -10px;
+        margin-left: -10px;
+
+    }
+
+    .bg_item_us {
+        background-color: rgb(49, 52, 72);
+    }
+
+    .out {
+        overflow: hidden;
+    }
+
+    .cir {
+        position: relative;
+        width: 30px;
+        height: 30px;
+        overflow: hidden;
+        border-radius: 50%;
+    }
+
+    .hdd {
+        display: none;
+    }
+</style>
+
+<div class="row card-3" style=" margin-bottom: 10px; padding-bottom: 10px; padding-top: 10px;">
+    <div class="col ft" style="font-size: 25px;"><%= mg_theloai %></div>
+    <div class="col"><input type="search" placeholder="Search"></div>
+</div>
+
+<div class="row over" id="getmodal">
+    <% for(let i = 0; i < _theol.length; i++) { %>
+    <div class="col-md-3 bar " id="bgh">
+        <div class="card text-white mb-3  bg_item_us">
+            <div class="card-header acb">
+                <div class="row">
+                    <div class="col-3 out">
+                        <div class="cir">
+                            <input class="rad align-middle" type="color" value="<%= _theol[i].color %>">
+                        </div>
+                    </div>
+                    <div class="col-9 ">
+                        <div><%= _theol[i].namely %></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <p class="card-text" style="font-family: 'Quicksand', sans-serif; color: azure; size: 25px;">Số lượng
+                    preset:
+                    <%= _theol[i].sanphams.length %></p>
+            </div>
+            <div class="card-footer bg-transparent border-success ">
+                <div class="row">
+                    <div class="col">
+                        <button class="btn btn-outline-secondary w-100 " type="button">
+                            <a href="javascript:void(0);" data-id="<%= _theol[i]._id %>" class="edit"
+                                data-category_name="<%= _theol[i].namely %>"
+                                data-category_color="<%= _theol[i].color %>">Edit</a>
+                        </button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-outline-secondary w-100" type="button">
+                            <a href="javascript:void(0);" data-id="<%= _theol[i]._id %>"
+                                data-category_namedel="<%= _theol[i].namely %>" class="delete">Delete</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <% } %>
+</div>
+
+
+<div class="row fixed-bottom" onclick="myFunction()">
+    <div class="mainopShadow"></div>
+    <div class="fab" data-toggle="modal" data-target="#form">
+        <div class="mainop">
+            <i id="addIcon" class="zmdi zmdi-plus"></i>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <h5 class="modal-title" id="exampleModalLabel">Create Account</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/thelma/upload" method="POST" enctype="application/x-www-form-urlencoded">
+                <div class="file-field input-field">
+                    <div class="form-group">
+                        <label for="namely" class="font-weight-bold">Tiêu đề</label>
+                        <input type="text" name="namely" class="form-control" placeholder="The loai">
+                    </div>
+                    <div class="form-group">
+                        <label for="color" class="font-weight-bold">Tiêu đề</label>
+                        <input type="color" name="color" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer border-top-0 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-dark">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Modal edit and update -->
+<form action="/thelma/update/" method="POST">
+    <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" name="product_name" class="form-control product_name"
+                            placeholder="Product Name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <!-- <input type="text" name="product_price" class="form-control price" placeholder="Price" required> -->
+                        <label for="color" class="font-weight-bold">Tiêu đề</label>
+                        <input type="color" name="product_price" class="form-control price" placeholder="Price"
+                            required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="id" class="product_id">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- Modal delete -->
+<form action="/thelma/delete/" method="POST">
+    <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Xoá thể loại</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-danger">
+                    <p class="product_delete_name"></p>
+                    <p class="product_delete_product"></p>
+                </div>
+
+                <div class="modal-footer">
+                    <input type="hidden" name="id" class="product_id2">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    $(document).ready(function () {
+        //showing data to edit modal
+        $('#getmodal').on('click', '.edit', function () {
+            var product_id = $(this).data('id');
+            var product_name = $(this).data('category_name');
+            var product_price = $(this).data('category_color');
+            $('#EditModal').modal('show');
+            $('.product_name').val(product_name);
+            $('.price').val(product_price);
+            $('.product_id').val(product_id);
+        });
+        // showing delete record modal
+        $('#getmodal').on('click', '.delete', function () {
+            var product_ids = $(this).data('id');
+            var product_names = $(this).data('category_namedel');
+            $('#DeleteModal').modal('show');
+            // $('.product_delete_name').val(product_names);
+            $('.product_delete_name').text('Bạn chắc chắn muốn xoá ' + product_names);
+            $('.product_delete_product').text('Đồng thời bạn sẽ xoá tất cả sản phẩm thuộc thể loại này');
+            $('.product_id2').val(product_ids);
+        });
+
+
+    });
+
+</script>

@@ -1,0 +1,51 @@
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://unpkg.com/popper.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Baloo+Thambi+2&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3 h-100 ">
+            <!-- Navigation -->
+            <%- include ('./partials/navigation') %>
+        </div>
+        <div class=" col-9">
+            <!-- Main -->
+            <%- include ('./partials/home') %>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    var menuIconEl = $('.menu-icon');
+    var sidenavEl = $('.sidenav');
+    var sidenavCloseEl = $('.sidenav__close-icon');
+    var das = $('.sidenav__list-item');
+    var das2 = $('.sidenav__list-item2');
+
+
+    // Add and remove provided class names
+    function toggleClassName(el, className) {
+        if (el.hasClass(className)) {
+            el.removeClass(className);
+        } else {
+            el.addClass(className);
+        }
+    }
+
+
+    // Open the side nav on clicks
+    menuIconEl.on('click', function () {
+        toggleClassName(sidenavEl, 'active');
+    });
+
+    // Close the side nav on click
+    sidenavCloseEl.on('click', function () {
+        toggleClassName(sidenavEl, 'active');
+    });
+</script>
